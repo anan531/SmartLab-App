@@ -1,0 +1,115 @@
+{% extends 'Lab assisstant/indexla.html' %}
+{% block body %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<style>
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(113, 20, 0, 0.78);
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:hover,
+        select:hover {
+            border-color: #555;
+        }
+
+        input[type="submit"] {
+            background-color: #8B0000;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Student Details</h2>
+        <!-- Search Form -->
+        <form id="form1" name="form1" method="post" action="">
+            <div class="form-inline">
+                <label>
+                    <input type="text" name="textfield" placeholder="Enter Student ID">
+                </label>
+                <label>
+                    <input type="submit" name="Submit" value="Go">
+                </label>
+            </div>
+        </form>
+
+        <!-- Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Roll No.</th>
+                    <th>Course</th>
+                    <th>Image</th>
+                    <th>Phone No.</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>12345</td>
+                    <td>B.Sc. CS</td>
+                    <td><img src="#" alt="Student Image" width="50px" height="50px" style="border-radius: 5px;"></td>
+                    <td>9876543210</td>
+                    <td>john.doe@example.com</td>
+                    <td><a href="#">Allocate</a></td>
+                </tr>
+                <!-- Additional Rows (Dynamic Data Placeholder) -->
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>67890</td>
+                    <td>B.A. English</td>
+                    <td><img src="#" alt="Student Image" width="50px" height="50px" style="border-radius: 5px;"></td>
+                    <td>9876543211</td>
+                    <td>jane.smith@example.com</td>
+                    <td><a href="#">Allocate</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{% endblock %}

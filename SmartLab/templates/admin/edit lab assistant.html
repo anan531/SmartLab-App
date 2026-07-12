@@ -1,0 +1,162 @@
+{% extends 'admin/indexadmin.html' %}
+{% block body %}
+    <style>
+    .form-container {
+      max-width: 400px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(113, 20, 0, 0.68);
+      padding: 20px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    form input[type="text"],
+    form input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #711400;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    form input[type="submit"] {
+      background-color: #711400;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    form input[type="submit"]:hover {
+      background-color: #711400;
+    }
+
+    /* Card container for displaying departments */
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    /* Individual card styling */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(113, 20, 0, 0.77);
+      width: 600px; /* Set card width */
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.5em;
+      color: #711400;
+    }
+
+    .card p {
+      margin: 0 0 10px;
+      color: #555;
+    }
+
+    /* Action buttons in the card */
+    .card-actions a {
+      text-decoration: none;
+      color: #fff;
+      background-color: #711400;
+      padding: 8px 15px;
+      border-radius: 4px;
+      margin: 5px;
+      display: inline-block;
+    }
+
+    .card-actions a:hover {
+      background-color: #711400;
+    }
+
+    .card-actions .delete {
+      background-color: #dc3545;
+    }
+
+    .card-actions .delete:hover {
+      background-color: #c82333;
+    }
+
+  </style>
+<body>
+  <div class="card">
+    <h2>Edit Lab Assistant</h2>
+    <form id="form1" name="form1" method="post" action="/edit_lab_assistant_post#stats">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="textfield" value="{{labasst.name}}" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed"/>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="textfield1" value="{{labasst.email}}" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}" title="Required correct format"/>
+      </div>
+      <div class="form-group">
+        <label for="phone_no">Phone no</label>
+        <input type="text" id="phone_no" name="textfield2" value="{{labasst.phone_no}}" required pattern="[6789][0-9]{0,9}" title="Enter valid Phone no"/>
+      </div>
+      <div class="form-group">
+        <label>Previous Image</label>
+        <img src="{{ labasst.image.url }}" width="100" height="100" alt="Previous Image">
+      </div>
+      <div class="form-group"><label for="image">Upload Image</label>
+        <input type="file" id="image" name="file2" required class="form-control"/>
+      </div>
+      <div class="form-group"><label for="gender">Gender</label>
+        <select name="lab" id="gender" required class="form-control">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="post">Post</label>
+        <input type="text" id="post" name="textfield5" value="{{labasst.post}}" required pattern="[A-Z a-z.]{3,25}" title="Enter valid Post"/>
+      </div>
+      <div class="form-group">
+        <label for="place">Place</label>
+        <input type="text" id="place" name="textfield6" value="{{labasst.place}}" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed"/>
+      </div>
+      <div class="form-group">
+        <label for="pin">Pin</label>
+        <input type="text" id="pin" name="textfield7" value="{{labasst.pin}}" required pattern="[0-9]{6}" title="Enter valid PIN"/>
+      </div>
+      <div class="form-group">
+        <label for="dob">DOB</label>
+        <input type="date" id="dob" name="textfield8" class="form-control" value="{{ labasst.dob|date:'Y-m-d'}}" min="1960-01-01" max="2019-12-31" required />
+      </div>
+      <div class="form-group">
+        <label for="qualification">Qualification</label>
+        <input type="text" id="qualification" name="textfield9" value="{{labasst.qualification}}" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed"/>
+      </div>
+      <tr>
+          <td colspan="2" style="text-align: center;">
+            <input type="submit" name="Submit" value="Save" />
+          </td>
+        </tr>
+    </form>
+  </div>
+</body>
+</html>
+{% endblock %}
+
+

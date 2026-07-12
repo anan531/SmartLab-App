@@ -1,0 +1,141 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+
+{#{% csrf_token %}#}
+{#  <table width="746" height="197" border="1">#}
+{##}
+{#    <tr>#}
+{#        <td colspan="15">Student Name#}
+{#        <label>#}
+{#        <input type="text" name="textfield" value="{{ s }}"/>#}
+{#        </label>        <label>#}
+{#        <input type="submit" name="Submit" value="Go" />#}
+{#        </label></td>#}
+{#    </tr>#}
+{#  <tr>#}
+{#      <td width="84" height="37">Roll no </td>#}
+{#      <td width="125">Student Name </td>#}
+{#      <td width="101">Image</td>#}
+{#      <td width="91">Course</td>#}
+{#      <td width="112">Phone no </td>#}
+{#      <td width="125">Email</td>#}
+{#       <td width="125">Semester</td>#}
+{#      <td width="101">Gender</td>#}
+{#      <td width="91">Post</td>#}
+{#      <td width="112">Place</td>#}
+{#      <td width="125">Pin</td>#}
+{#        <td width="125">DOB</td>#}
+{#        <td width="125">Qualification</td>#}
+{#        <td width="125">System no </td>#}
+{#    </tr>#}
+{#      {% for i in data %}#}
+{#    <tr>#}
+{#      <td>{{ i.roll_no}}</td>#}
+{#       <td>{{ i.studname }}</td>#}
+{#       <td>{%  if i.image.url != "" %}<img src="{{ i.image.url }}" width="200px" height="200px">{%  else %} <p>No image</p>{%  endif %}</td>#}
+{#      <td>{{ i.COURSE.course_name}}</td>#}
+{#       <td>{{ i.phone_no}}</td>#}
+{#      <td>{{ i.email}}</td>#}
+{#      <td>{{ i.semester}}</td>#}
+{#      <td>{{ i.gender}}</td>#}
+{#       <td>{{ i.post}}</td>#}
+{#      <td>{{ i.place}}</td>#}
+{#      <td>{{ i.pin}}</td>#}
+{#      <td>{{ i.dob}}</td>#}
+{#      <td>{{ i.qualification}}</td>#}
+{#    <td>{{ i.system_no}}</td>#}
+{#      <td height="61" colspan="15"><p>&nbsp;</p>#}
+{#          <p align="center"><a href="">Allocate</a></p></td>#}
+{#    </tr>#}
+{#      {% endfor %}#}
+{##}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+{% extends 'Lab assisstant/indexla.html' %}
+{% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allocate System</title>
+    <style>
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(113, 20, 0, 0.78);
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:hover,
+        select:hover {
+            border-color: #555;
+        }
+
+        input[type="submit"] {
+            background-color: #8B0000;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Allocate System</h2>
+        <form id="form1" name="form1" method="post" action="/allocate_system_post#stats">
+            {% csrf_token %}
+
+            <label for="system">System No</label>
+            <select name="system" id="system" required>
+                {% for i in sys %}
+                    <option value="{{ i.id }}">{{ i.system_no }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Allocate">
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

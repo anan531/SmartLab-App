@@ -1,0 +1,115 @@
+{% extends 'admin/indexadmin.html' %}
+{% block body %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab Assistant Form</title>
+<style>
+
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(113, 20, 0, 0.64);
+    padding: 20px;
+  }
+
+  .form-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .form-container td {
+    padding: 10px;
+    vertical-align: top;
+  }
+
+  .form-container input[type="text"],
+  .form-container input[type="file"],
+  .form-container input[type="date"],
+  .form-container select,
+  .form-container input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #711400;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .form-container input[type="submit"] {
+    background-color: #711400;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .form-container input[type="submit"]:hover {
+    background-color: #711400;
+  }
+</style>
+</head>
+<body>
+  <div class="form-container">
+    <form id="form1" name="form1" method="post" action="/admin_add_lab_assistant_post#stats">
+      {% csrf_token %}
+      <table>
+        <tr>
+          <td>Name</td>
+          <td><input type="text" name="textfield" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed" /></td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><input type="text" name="textfield1" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}" title="Required correct format" /></td>
+        </tr>
+        <tr>
+          <td>Phone No</td>
+          <td><input type="text" name="textfield2" required pattern="[6789][0-9]{9}" title="Enter valid Phone no" /></td>
+        </tr>
+        <tr>
+          <td>Image</td>
+          <td><input type="file" name="file2" required /></td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>
+            <select name="lab" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Others">Others</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Post</td>
+          <td><input type="text" name="textfield5" required pattern="[A-Z a-z.]{3,25}" title="Enter valid Post" /></td>
+        </tr>
+        <tr>
+          <td>Place</td>
+          <td><input type="text" name="textfield6" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed" /></td>
+        </tr>
+        <tr>
+          <td>Pin</td>
+          <td><input type="text" name="textfield7" required pattern="[0-9]{6}" title="Enter valid PIN" /></td>
+        </tr>
+        <tr>
+          <td>DOB</td>
+          <td><input type="date" name="textfield8" min="1960-01-01" max="2019-12-31" required /></td>
+        </tr>
+        <tr>
+          <td>Qualification</td>
+          <td><input type="text" name="textfield9" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed" /></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;">
+            <input type="submit" name="Submit" value="Add" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</body>
+{#</html>#}
+{% endblock %}

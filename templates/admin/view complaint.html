@@ -1,0 +1,110 @@
+{% extends 'admin/indexadmin.html' %}
+{% block body %}
+<style>
+  .form-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-container input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid rgba(113, 20, 0, 0.8);
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .form-container input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #711400;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .form-container input[type="submit"]:hover {
+    background-color: #060100;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: nowrap; /* Ensure cards stay in a single row */
+    gap: 20px;
+    justify-content: flex-start; /* Align items horizontally */
+    overflow-x: auto; /* Allow scrolling for overflow */
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(113, 20, 0, 0.5);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    flex-shrink: 0; /* Prevent cards from shrinking */
+  }
+
+  .card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  .card h3 {
+    color: #711400;
+    margin: 0 0 10px;
+  }
+
+  .card p {
+    margin: 5px 0;
+    color: #555;
+  }
+
+  .reply a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #711400;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin: 5px;
+    display: inline-block;
+  }
+
+  .reply a:hover {
+    background-color: #711400;
+  }
+
+  .reply span {
+    display: inline-block;
+    background-color: #711400;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <div class="card-container">
+      {% for i in data %}
+      <div class="card">
+        <h5><strong>Complaint:</strong> {{ i.complaint }}</h5>
+        <p><strong>Student:</strong> {{ i.STUDENT.studname }}</p>
+        <p><strong>Staff:</strong> {{ i.STAFF.name }}</p>
+        <p>Date: {{ i.date }}</p>
+        <div class="reply">
+          {% if i.reply == 'pending' %}
+          <a href="/send_reply/{{ i.id }}#stats">Reply</a>
+          {% else %}
+          <span>{{ i.reply }}</span>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+{% endblock %}

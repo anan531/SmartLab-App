@@ -1,0 +1,142 @@
+{% extends 'admin/indexadmin.html' %}
+{% block body %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<style>
+
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(113, 20, 0, 0.64);
+    padding: 20px;
+  }
+
+  .form-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .form-container td {
+    padding: 10px;
+    vertical-align: top;
+  }
+
+  .form-container input[type="text"],
+  .form-container input[type="file"],
+  .form-container input[type="date"],
+  .form-container select,
+  .form-container input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #711400;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .form-container input[type="submit"] {
+    background-color: #711400;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .form-container input[type="submit"]:hover {
+    background-color: #711400;
+  }
+</style>
+</head>
+
+<body>
+<div class="form-container">
+<form id="form1" name="form1" method="post" action="/admin_add_staff_post#stats">
+  <table width="251" border="1">
+    <tr>
+       <td>Course
+        <label>
+           <select name="course_name" required>
+             {% for i in cour %}
+                 <option value="{{ i.id }}">{{ i.course_name}}</option>
+            {% endfor %}
+        </select>
+        </label></td>
+    </tr>
+    <tr>
+      <td>Name
+        <label>
+        <input type="text" name="textfield" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed"/>
+        </label></td></tr>
+   <tr>
+      <td>Email
+        <label>
+        <input type="text" name="textfield1" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}" title="Required correct format"/>
+        </label></td></tr>
+      <tr>
+      <td>Phone no
+        <label>
+        <input type="text" name="textfield2" required pattern="[6789][0-9]{9}" title="Enter valid Phone no"/>
+        </label></td></tr>
+       <tr>
+      <td>Image
+        <label>
+        <input type="file" name="file2" required/>
+        </label></td></tr>
+       <tr>
+      <td>Semester
+        <label>
+        <input type="text" name="textfield3" required pattern="[0-9]{1,2}" title="Enter valid Semester"/>
+        </label></td></tr>
+      <tr>
+      <td>Gender
+        <label>
+          <select name="lab" required>
+
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+        </select>
+        </label></td></tr>
+      <tr>
+      <td>Post
+        <label>
+        <input type="text" name="textfield5" required pattern="[A-Z a-z.]{3,25}" title="Enter valid Post"/>
+        </label></td></tr>
+      <tr>
+      <td>Place
+        <label>
+        <input type="text" name="textfield6" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed"/>
+        </label></td></tr>
+      <tr>
+      <td>Pin
+        <label>
+        <input type="text" name="textfield7" required pattern="[0-9]{6}" title="Enter valid PIN"/>
+        </label></td></tr>
+      <tr>
+      <td>DOB
+        <label>
+        <input type="date" name="textfield8" min="1960-01-01" max="2019-12-31" required/>
+        </label></td></tr>
+  <tr>
+      <td>Qualification
+        <label>
+        <input type="text" name="textfield9" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed"/>
+        </label></td></tr>
+      <tr>
+      <td>Program Language
+        <label>
+        <input type="text" name="textfield10" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed"/>
+        </label></td></tr>
+     <tr>
+          <td colspan="2" style="text-align: center;">
+            <input type="submit" name="Submit" value="Add" />
+          </td>
+        </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

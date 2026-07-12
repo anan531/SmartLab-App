@@ -1,0 +1,107 @@
+{% extends 'admin/indexadmin.html' %}
+{% block body %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Edit Lab Assignment</title>
+<style>
+
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(113, 20, 0, 0.66);
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+    }
+    .form-container {
+        background-color: rgba(113, 20, 0, 0);
+        color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(113, 20, 0, 0.71);
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+    .form-group input[type="file"] {
+        padding: 5px;
+    }
+
+    .form-group input[type="submit"] {
+        background-color: #990000;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form-group input[type="submit"]:hover {
+        background-color: #000000;
+    }
+</style>
+</head>
+
+<body>
+<div class="card">
+    <h2>Edit Lab Assignment</h2>
+    <div class="form-header"></div>
+    <form id="form1" name="form1" method="post" action="/edit_assign_lab_post#stats">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="ass">Lab Assistant</label>
+            <select name="ass" id="ass" required >
+                {% for i in ass %}
+                    <option value="{{ i.id }}" {% if i.id == lab.ass.id %}selected{% endif %}>{{ i.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+
+            <label for="lab">Lab Number</label>
+            <select name="lab" id="lab" required >
+                {% for i in labno %}
+                    <option value="{{ i.id }}" {% if i.id == lab.lab.id %}selected{% endif %}>{{ i.Lab_no }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+
+            <label for="date">Date</label>
+            <input type="date" name="textfield2" id="date" value="{{ lab.date|date:'Y-m-d' }}" min="1990-01-01" max="2025-12-31" required />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" name="Submit" value="Save" />
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
+{% endblock %}

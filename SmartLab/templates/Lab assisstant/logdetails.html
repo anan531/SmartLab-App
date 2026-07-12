@@ -1,0 +1,76 @@
+{% extends 'Lab assisstant/indexla.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log Details</title>
+<style>
+        .form-container {
+            max-width: 1000px;
+            margin: 0 auto 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(113, 20, 0, 0.64);
+            padding: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table thead {
+            background-color: #711400;
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid rgba(113, 20, 0, 0.2);
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: rgba(113, 20, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Log Details</h2>
+    <form id="form1" name="form1" method="post" action="/log_details#stats">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>System ID</th>
+                <th>Login Time</th>
+                <th>Logout Time</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.SYSTEM_ID.system_no }}</td>
+                <td>{{ i.login_time }}</td>
+                <td>{{ i.logout_time }}</td>
+                <td>{{ i.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+{% endblock %}

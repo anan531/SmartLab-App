@@ -1,0 +1,106 @@
+{% extends 'Lab assisstant/indexla.html' %}
+{% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add System</title>
+    <style>
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:hover,
+        select:hover {
+            border-color: #555;
+        }
+
+        input[type="submit"] {
+            background-color: #8B0000;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #a00000;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Add System</h2>
+        <form action="/lab_assistant_add_system_post#stats" method="post">
+            {% csrf_token %}
+
+            <label for="lab">Lab No</label>
+            <select id="lab" name="select" required>
+                {% for i in data %}
+                    <option value="{{ i.LAB.id }}">{{ i.LAB.Lab_no }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="system">System No</label>
+            <input type="text" id="system" name="textfield" required pattern="[A-Za-z0-9]{1,2}" title="Enter valid System No">
+
+            <label for="password">Password</label>
+            <input type="text" id="password" name="textfield1" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+
+{#            <label for="processor">Processor</label>#}
+{#            <input type="text" id="processor" name="textfield2" required pattern="[A-Za-z0-9]{2,25}" title="Enter valid processor">#}
+
+             <label for="processor">Processor</label>
+            <input type="text" id="processor" name="textfield2" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed">
+
+
+            <label for="ram">RAM</label>
+            <input type="text" id="ram" name="textfield3" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed">
+
+            <label for="ssd">SSD</label>
+            <input type="text" id="ssd" name="textfield4" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed">
+
+            <label for="hdd">HDD</label>
+            <input type="text" id="hdd" name="textfield5" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed">
+
+            <label for="date">Date</label>
+            <input type="date" id="date" name="textfield6" min="1990-01-01" max="2026-12-31" required>
+
+            <input type="submit" name="Submit" value="Add">
+        </form>
+    </div>
+</body>
+</html>
+
+{% endblock %}

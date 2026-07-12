@@ -1,0 +1,80 @@
+{% extends 'Lab assisstant/indexla.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notification</title>
+<style>
+        .form-container {
+            max-width: 1000px;
+            margin: 0 auto 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(113, 20, 0, 0.64);
+            padding: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table thead {
+            background-color: #711400;
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid rgba(113, 20, 0, 0.2);
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: rgba(113, 20, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Notification Details</h2>
+    <form id="form1" name="form1" method="post" action="/notification_details#stats">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>System No</th>
+                <th>Screenshot</th>
+                <th>Cam Pic</th>
+                <th>Process</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.SYSTEM.system_no }}</td>
+                 <td><a href="{{ i.screenshot.url }}" target="_blank">{% if i.screenshot.url != "" %}<img src="{{ i.screenshot.url }}" alt=" Image" style="width: 150px; height: 150px; border-radius: 20%;">{% else %}<p>No Image</p>{% endif %}</a> </td>
+                 <td><a href="{{ i.camera_image.url }}" target="_blank">
+
+                {% if i.camera_image.url != "" %}<img src="{{ i.camera_image.url }}" alt="Image" style="width: 150px; height: 150px; border-radius: 20%;">{% else %}<p>No Image</p>{% endif %}</a> </td>
+                <td>{{ i.process }}</td>
+                <td>{{ i.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+{% endblock %}

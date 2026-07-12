@@ -1,0 +1,106 @@
+{% extends 'Lab assisstant/indexla.html' %}
+{% block body %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Allocated Lab</title>
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto 20px auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(113, 20, 0, 0.64);
+        padding: 20px;
+        text-align: center;
+    }
+
+    .form-container input[type="text"] {
+        padding: 10px;
+        width: 70%;
+        border: 1px solid rgba(113, 20, 0, 0.8);
+        border-radius: 4px;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .form-container input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #711400;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .form-container input[type="submit"]:hover {
+        background-color: #060100;
+    }
+
+    .form-container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 8px;
+{#        box-shadow: 0 0 10px rgba(113, 20, 0, 0.64);#}
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    table thead {
+        background-color: #711400;
+        color: #fff;
+    }
+
+    table th, table td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid rgba(113, 20, 0, 0.2);
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    table tr:hover {
+        background-color: rgba(113, 20, 0, 0.1);
+    }
+</style>
+</head>
+<body>
+<div class="form-container">
+    <h2>View Allocated Labs</h2>
+    <form action="lab_assistant_view_allocated_lab_post#stats" method="post">
+        {% csrf_token %}
+        <input type="text" name="textfield" value="{{ s }}" placeholder="Enter Lab No." />
+        <input type="submit" name="Submit" value="Go" />
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Lab No.</th>
+                <th>Floor No</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.date }}</td>
+                <td>{{ i.LAB.Lab_no }}</td>
+                <td>{{ i.LAB.Floor_no }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+{% endblock %}

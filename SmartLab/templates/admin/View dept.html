@@ -1,0 +1,140 @@
+{% extends 'admin/indexadmin.html' %}
+{% block body %}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #711400;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .card {
+    width: 23%;
+    min-width: 200px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(113, 20, 0, 0.86);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-header {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #060100;
+    margin-bottom: 10px;
+
+  }
+
+  .card-details {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .card-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .card-actions a {
+    text-decoration: none;
+    color: #a72006;
+    font-weight: bold;
+  }
+
+  .card-actions a:hover {
+    text-decoration: underline;
+  }
+
+  .form-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+      color: #060100;
+      font-weight: bold;
+
+
+  }
+
+  input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+
+  input[type="submit"] {
+    padding: 8px 15px;
+    background-color: #060100;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #a72509;
+  }
+
+  .add-new {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #a72509;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  .add-new:hover {
+    background-color: rgba(6, 1, 0, 1);
+  }
+</style>
+
+<div class="form-wrapper">
+  <form id="form1" name="form1" method="post" action="/admin_view_dept_post#stats">
+    {% csrf_token %}
+    <label for="department-name">Dept Name</label>
+    <input type="text" name="textfield" id="department-name" value="{{ s }}" />
+    <input type="submit" name="Submit" value="Go" />
+  </form>
+</div>
+
+<div class="container">
+  {% for i in data %}
+    <div class="card">
+      <div class="card-header">
+        {{ i.department_name }}
+      </div>
+      <div class="card-details">
+        {{ i.details }}
+      </div>
+      <div class="card-actions">
+        <a href="/edit_department/{{ i.id }}#stats">Edit</a>
+        <a href="/delete_department/{{ i.id }}#stats">Delete</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="form-wrapper">
+  <a href="admin_add_department#stats" class="add-new">Add New Department</a>
+</div>
+
+{% endblock %}

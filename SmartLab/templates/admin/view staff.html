@@ -1,0 +1,154 @@
+{% extends 'admin/indexadmin.html' %}
+{% block body %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Staff Details</title>
+<style>
+    .form-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-container input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid rgba(113, 20, 0, 0.8);
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .form-container input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #711400;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: #060100;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(113, 20, 0, 0.76);
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: #711400;
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .card-actions a {
+      text-decoration: none;
+      color: #fff;
+      background-color: #060100;
+      padding: 8px 15px;
+      border-radius: 4px;
+      margin: 5px;
+      display: inline-block;
+    }
+
+    .card-actions a:hover {
+      background-color: #711400;
+    }
+
+    .card-actions .delete {
+      background-color: #711400;
+    }
+
+    .card-actions .delete:hover {
+      background-color: #c82333;
+    }
+
+    .add-new {
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .add-new a {
+      text-decoration: none;
+      padding: 10px 20px;
+      background-color: #711400;
+      color: #fff;
+      border-radius: 4px;
+    }
+
+    .add-new a:hover {
+      background-color: #711400;
+    }
+  </style>
+</head>
+
+<body>
+<div class="form-container">
+    <div class="search-bar">
+        <form id="form1" name="form1" method="post" action="/admin_view_staff_post#stats">
+            {% csrf_token %}
+            <input type="text" name="textfield" value="{{ s }}" placeholder="Search staff..." />
+            <input type="submit" name="Submit" value="Go" />
+        </form>
+
+    <div class="card-container">
+        {% for i in data %}
+        <div class="card">
+            {% if i.image.url != "" %}
+            <img src="{{ i.image.url }}" alt="{{ i.name }}">
+            {% else %}
+            <img src="https://via.placeholder.com/100x50" alt="No Image Available">
+            {% endif %}
+                <h3>{{ i.name }}</h3>
+                <p><strong>Course:</strong> {{ i.COURSE.course_name }}</p>
+                <p><strong>Phone:</strong> {{ i.phone_no }}</p>
+                <p><strong>Email:</strong> {{ i.email }}</p>
+                <p><strong>Place:</strong> {{ i.place }}</p>
+                <p><strong>Semester:</strong> {{ i.semester }}</p>
+                <p><strong>Gender:</strong> {{ i.gender }}</p>
+                <p><strong>Post:</strong> {{ i.post }}</p>
+                <p><strong>Pin:</strong> {{ i.pin }}</p>
+                <p><strong>DOB:</strong> {{ i.dob }}</p>
+                <p><strong>Qualification:</strong> {{ i.qualification }}</p>
+                <p><strong>Language:</strong> {{ i.program_language }}</p>
+                <div class="card-actions">
+                <a href="/edit_staff/{{ i.id }}#stats">Edit</a>
+                <a href="/delete_staff/{{ i.id }}#stats">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="add-new">
+        <a href="admin_add_staff#stats">Add New Staff</a>
+    </div>
+</div>
+</body>
+</html>
+
+{% endblock %}

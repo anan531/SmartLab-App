@@ -1,0 +1,173 @@
+{% extends 'staff/indexstaff.html' %}
+{% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Students</title>
+    <style>
+
+
+        .form-container {
+            max-width: 2000px;
+            margin: 0 auto 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(113, 20, 0, 0.64);
+            padding: 5px;
+            text-align: center;
+        }
+
+        .form-container input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid rgba(113, 20, 0, 0.8);
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .form-container input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #711400;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #060100;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table thead {
+            background-color: #711400;
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 5px;
+            text-align: left;
+            border: 1px solid rgba(113, 20, 0, 0.2);
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .actions a {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        .actions .edit {
+            background-color: #711400;
+        }
+
+        .actions .edit:hover {
+            background-color: black;
+        }
+
+        .actions .delete {
+            background-color: #711400;
+        }
+
+        .actions .delete:hover {
+            background-color: black;
+        }
+
+        .add-new {
+            text-align: center;
+        }
+
+        .add-new a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #711400;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .add-new a:hover {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>View Students</h2>
+    <form id="form1" name="form1" method="post" action="/staff_view_student_post#stats">
+        {% csrf_token %}
+        <input type="text" name="textfield13" value="{{ s }}" placeholder="Enter Student Name" />
+        <input type="submit" name="Submit" value="Go" />
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Roll No</th>
+                <th>Student Name</th>
+                <th>Image</th>
+                <th>Course</th>
+                <th>Phone No</th>
+                <th>Email</th>
+                <th>Semester</th>
+                <th>Gender</th>
+                <th>Post</th>
+                <th>Place</th>
+                <th>Pin</th>
+                <th>DOB</th>
+                <th>Qualification</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.roll_no }}</td>
+                <td>{{ i.studname }}</td>
+                <td>
+                    {% if i.image.url != "" %}
+                        <img src="{{ i.image.url }}" width="100" height="100" alt="Student Image"  style="width: 50px; height: 50px; border-radius: 50%;">
+                    {% else %}
+                        <p>No image</p>
+                    {% endif %}
+                </td>
+                <td>{{ i.COURSE.course_name }}</td>
+                <td>{{ i.phone_no }}</td>
+                <td>{{ i.email }}</td>
+                <td>{{ i.semester }}</td>
+                <td>{{ i.gender }}</td>
+                <td>{{ i.post }}</td>
+                <td>{{ i.place }}</td>
+                <td>{{ i.pin }}</td>
+                <td>{{ i.dob }}</td>
+                <td>{{ i.qualification }}</td>
+                <td class="actions">
+                    <a href="/edit_student/{{ i.id }}#stats" class="edit">Edit</a>
+                    <a href="/delete_student/{{ i.id }}#stats" class="delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="add-new">
+        <a href="/staff_add_student#stats">Add New</a>
+    </div>
+</div>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'admin/indexadmin.html' %}
+{% block body %}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #711400;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .card {
+    width: 23%;
+    min-width: 200px;
+    background-color: #f9f9f9;
+    border: 1px solid rgba(113, 20, 0, 0);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(113, 20, 0, 0.71);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-header {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #060100;
+    margin-bottom: 10px;
+
+  }
+
+  .card-details {
+    font-size: 1em;
+    color: #711400;
+    margin-bottom: 20px;
+  }
+
+  .card-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .card-actions a {
+    text-decoration: none;
+    color: #060100;
+    font-weight: bold;
+  }
+
+  .card-actions a:hover {
+    text-decoration: underline;
+  }
+
+  .form-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+      color: #711400;
+      font-weight: bold;
+
+
+  }
+
+  input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+
+  input[type="submit"] {
+    padding: 8px 15px;
+    background-color: #060100;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #a72509;
+  }
+
+  .add-new {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #a72509;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  .add-new:hover {
+    background-color: rgba(6, 1, 0, 1);
+  }
+</style>
+<body>
+  <div class="form-wrapper">
+    <div class="search-bar">
+      <form id="form1" name="form1" method="post" action="/admin_view_system_details_post#stats">
+        {% csrf_token %}
+
+        <input type="text" name="textfield" value="{{ s }}" placeholder="Enter System No" />
+        <input type="submit" name="Submit" value="Go" />
+      </form>
+    </div>
+
+    <div class="container">
+      {% for i in data %}
+      <div class="card">
+      <div class="card-header">
+        <h3>System No: {{ i.system_no }}</h3>
+        <p><strong>Password:</strong> {{ i.password }}</p>
+        <p><strong>Processor:</strong> {{ i.processor }}</p>
+        <p><strong>RAM:</strong> {{ i.RAM }}</p>
+        <p><strong>SSD:</strong> {{ i.SSD }}</p>
+        <p><strong>HDD:</strong> {{ i.HDD }}</p>
+        <p class="date"><strong>Date:</strong> {{ i.date }}</p>
+      </div>
+        </div>
+      {% endfor %}
+
+  </div>
+</body>
+{% endblock %}

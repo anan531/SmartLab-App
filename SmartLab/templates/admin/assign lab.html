@@ -1,0 +1,82 @@
+{% extends 'admin/indexadmin.html' %}
+{% block body %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Lab Assignment Form</title>
+<style>
+    .card {
+        background: #fff;
+        width: 400px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(113, 20, 0, 0.78);
+        padding: 20px;
+        border: 1px solid #eaeaea;
+    }
+    .card h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 22px;
+    }
+    .card form {
+        display: flex;
+        flex-direction: column;
+    }
+    .card label {
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #555;
+    }
+    .card input[type="text"] {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid rgba(113, 20, 0, 0.58);
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+    .card input[type="submit"] {
+        padding: 10px 15px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #711400;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .card input[type="submit"]:hover {
+        background-color: #000000;
+    }
+</style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Assign Lab</h2>
+        <form action="/admin_assign_lab_post#stats" method="post">
+            {% csrf_token %}
+
+            <label for="ass">Lab Assistant</label>
+            <select name="ass" id="ass" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed">
+                {% for i in ass %}
+                    <option value="{{ i.id }}">{{ i.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="lab">Lab No</label>
+            <select name="lab" id="lab" required pattern="[0-9]{1,2}" title="Enter valid Lab no">
+                {% for i in lab %}
+                    <option value="{{ i.id }}">{{ i.Lab_no }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="date">Date</label>
+            <input type="date" name="textfield2" id="date" required />
+
+            <input type="submit" name="Submit" value="Add">
+        </form>
+    </div>
+</body>
+</html>
+
+{% endblock %}

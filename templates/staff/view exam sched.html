@@ -1,0 +1,150 @@
+{% extends 'staff/indexstaff.html' %}
+{% block body %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Exam Schedule</title>
+<style>
+        .form-container {
+            max-width: 1800px;
+            margin: 0 auto 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(113, 20, 0, 0.64);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .form-container input[type="text"] {
+            padding: 10px;
+            width: 50%;
+            border: 1px solid rgba(113, 20, 0, 0.8);
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .form-container input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #711400;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #060100;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table thead {
+            background-color: #711400;
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid rgba(113, 20, 0, 0.2);
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .actions a {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        .actions .edit {
+            background-color: #711400;
+        }
+
+        .actions .edit:hover {
+            background-color: black;
+        }
+
+        .actions .delete {
+            background-color: #711400;
+        }
+
+        .actions .delete:hover {
+            background-color: black;
+        }
+
+        .add-new {
+            text-align: center;
+        }
+
+        .add-new a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #711400;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .add-new a:hover {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+    <h2>View Exam Schedule</h2>
+        <form id="form1" name="form1" method="post" action="/staff_view_exam_schedule_post#stats">
+            {% csrf_token %}
+            <div class="input-container">
+                <div>
+                    <label for="textfield">Exam Name</label>
+                    <input type="text" id="textfield" name="textfield" value="{{ s }}"/>
+                    <input type="submit" name="Submit" value="Go" />
+                </div>
+            </div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Subject</th>
+                        <th>Staff</th>
+                        <th>Exam Name</th>
+                        <th>Duration</th>
+                        <th>Syllabus</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ i.date }}</td>
+                        <td>{{ i.time }}</td>
+                        <td>{{ i.SUBJECT.subject }}</td>
+                        <td>{{ i.STAFF.name }}</td>
+                        <td>{{ i.exam_name }}</td>
+                        <td>{{ i.duration }}</td>
+                        <td>{{ i.syllabus }}</td>
+                        <td>{{ i.details }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'Lab assisstant/indexla.html' %}
+{% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled</title>
+    <style>
+         .btn-refresh {
+            background-color: #711400;
+            color: white;
+            border: none;
+        }
+        .btn-refresh:hover {
+            background-color: #5a0f00; /* Darker shade for hover effect */
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(113, 20, 0, 0.78);
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card h2 {
+            text-align: center;
+            color: #711400;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #711400;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:hover,
+        select:hover {
+            border-color: #711400;
+        }
+
+        input[type="submit"] {
+            background-color: #8B0000;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>View Images</h2>
+        <form id="form1" name="form1" method="post" action="/screenshot#stats">
+{#           <a href="/r_screenshot/{{ request.session.sid }}#stats" class="btn btn-refresh">REFRESH</a>#}
+        </form>
+        <table>
+        <thead>
+            <tr> <th>Date</th>
+                <th>Screenshot</th>
+                <th>Cam Pic</th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+            <td>{{ i.date }}</td>
+                <td><a href="{{ i.screenshot.url }}" target="_blank">{% if i.screenshot.url != "" %}<img src="{{ i.screenshot.url }}" alt=" Image" style="width: 150px; height: 150px; border-radius: 20%;">{% else %}<p>No Image</p>{% endif %}</a> </td>
+                <td><a href="{{ i.campic.url }}" target="_blank">
+
+                {% if i.campic.url != "" %}<img src="{{ i.campic.url }}" alt="Image" style="width: 150px; height: 150px; border-radius: 20%;">{% else %}<p>No Image</p>{% endif %}</a> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+</html>
+{% endblock %}
+

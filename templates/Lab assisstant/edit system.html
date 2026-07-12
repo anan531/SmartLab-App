@@ -1,0 +1,124 @@
+{% extends 'Lab assisstant/indexla.html' %}
+{% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit System</title>
+    <style>
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:hover,
+        select:hover {
+            border-color: #555;
+        }
+
+        input[type="submit"] {
+            background-color: #8B0000;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+            padding: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #000000;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Edit System</h2>
+        <form id="form1" name="form1" method="post" action="/edit_system_post#stats">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="lab">Lab No</label>
+                <select id="lab" name="select" required>
+                    {% for i in data %}
+                        <option value="{{ i.LAB.id }}">{{ i.LAB.Lab_no }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="system">System No</label>
+                <input type="text" id="system" name="textfield" value="{{ sys.system_no }}" required pattern="[A-Za-z0-9]{1,2}" title="Enter valid System No">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" id="password" name="textfield1" value="{{ sys.password }}" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+            </div>
+
+            <div class="form-group">
+                <label for="processor">Processor</label>
+                <input type="text" id="processor" name="textfield2" value="{{ sys.processor }}" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed">
+            </div>
+
+            <div class="form-group">
+                <label for="ram">RAM</label>
+                <input type="text" id="ram" name="textfield3" value="{{ sys.RAM }}" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed">
+            </div>
+
+            <div class="form-group">
+                <label for="ssd">SSD</label>
+                <input type="text" id="ssd" name="textfield4" value="{{ sys.SSD }}" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed">
+            </div>
+
+            <div class="form-group">
+                <label for="hdd">HDD</label>
+                <input type="text" id="hdd" name="textfield5" value="{{ sys.HDD }}" required pattern="[a-zA-Z0-9 ]+" title="only letters,numbers and spaces are allowed">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="textfield6" value="{{ exam.date|date:'Y-m-d' }}" min="1990-01-01" max="2025-12-31" required>
+            </div>
+
+            <input type="submit" name="Submit" value="Save">
+        </form>
+    </div>
+</body>
+</html>
+
+{% endblock %}
